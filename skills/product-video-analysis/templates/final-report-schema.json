@@ -1,0 +1,170 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "Complete Product Video Analysis Manifest",
+  "type": "object",
+  "required": [
+    "title",
+    "source",
+    "evidenceLabels",
+    "modules",
+    "shots",
+    "pdfQa"
+  ],
+  "properties": {
+    "title": {
+      "type": "string",
+      "minLength": 1
+    },
+    "source": {
+      "type": "object",
+      "required": [
+        "durationSeconds",
+        "fps"
+      ],
+      "properties": {
+        "durationSeconds": {
+          "type": "number",
+          "exclusiveMinimum": 0
+        },
+        "fps": {
+          "type": "number",
+          "exclusiveMinimum": 0
+        }
+      }
+    },
+    "evidenceLabels": {
+      "type": "array",
+      "minItems": 4
+    },
+    "modules": {
+      "type": "array",
+      "minItems": 25,
+      "items": {
+        "type": "object",
+        "required": [
+          "id",
+          "title",
+          "status"
+        ],
+        "properties": {
+          "id": {
+            "type": "integer",
+            "minimum": 1,
+            "maximum": 25
+          },
+          "title": {
+            "type": "string"
+          },
+          "status": {
+            "enum": [
+              "complete",
+              "incomplete"
+            ]
+          }
+        }
+      }
+    },
+    "shots": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "required": [
+          "id",
+          "start",
+          "end",
+          "screenshots",
+          "animations",
+          "productMapping"
+        ],
+        "properties": {
+          "id": {
+            "type": "string"
+          },
+          "start": {
+            "type": "number"
+          },
+          "end": {
+            "type": "number"
+          },
+          "screenshots": {
+            "type": "array",
+            "minItems": 3
+          },
+          "animations": {
+            "type": "array",
+            "minItems": 1,
+            "items": {
+              "type": "object",
+              "required": [
+                "name",
+                "evidence",
+                "properties",
+                "durationSeconds",
+                "durationFrames",
+                "timingFamily",
+                "soundCue",
+                "productMeaning"
+              ],
+              "properties": {
+                "name": {
+                  "type": "string"
+                },
+                "evidence": {
+                  "enum": [
+                    "Observed",
+                    "Estimated",
+                    "Inferred"
+                  ]
+                },
+                "properties": {
+                  "type": "array",
+                  "minItems": 1
+                },
+                "durationSeconds": {
+                  "type": "number",
+                  "minimum": 0
+                },
+                "durationFrames": {
+                  "type": "integer",
+                  "minimum": 0
+                },
+                "timingFamily": {
+                  "type": "string"
+                },
+                "soundCue": {
+                  "type": "string"
+                },
+                "productMeaning": {
+                  "type": "string"
+                }
+              }
+            }
+          },
+          "productMapping": {
+            "type": "string",
+            "minLength": 1
+          }
+        }
+      }
+    },
+    "pdfQa": {
+      "type": "object",
+      "required": [
+        "renderedAllPages",
+        "noOverflow",
+        "screenshotsLegible"
+      ],
+      "properties": {
+        "renderedAllPages": {
+          "const": true
+        },
+        "noOverflow": {
+          "const": true
+        },
+        "screenshotsLegible": {
+          "const": true
+        }
+      }
+    }
+  }
+}

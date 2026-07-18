@@ -1,0 +1,28 @@
+# Animation Event Template
+
+- **Timecode:**
+- **Screenshot sequence:** before / middle / after
+- **Common animation name:**
+- **Motion category:** transform / typography / UI / camera / transition / secondary
+- **Evidence label:** Observed / Estimated / Inferred
+- **Start state:**
+- **End state:**
+- **Properties:** position / scale / rotation / opacity / blur / mask / path / tracking / color / camera / depth
+- **Estimated duration:** seconds
+- **Estimated frame count:** frames at source FPS
+- **Timing family:** linear / ease-in / ease-out / ease-in-out / expo / back / spring / stepped / custom
+- **Approximate cubic-bezier:** only when applicable
+- **Value or speed graph description:**
+- **Anticipation:** none / subtle / clear
+- **Overshoot:** none / percentage and count
+- **Bounce:** none / rebound count and decay
+- **Follow-through or overlap:**
+- **Motion path:**
+- **Sound cue:**
+- **Sound sync point:** start / peak / target / settle / edit
+- **Narrative function:**
+- **Product characteristic expressed:**
+- **Why this animation fits:**
+- **Likely original technique (Inferred):**
+- **Recommended recreation:**
+- **Uncertainty:**
