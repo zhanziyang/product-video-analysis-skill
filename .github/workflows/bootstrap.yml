@@ -1,0 +1,34 @@
+name: Bootstrap repository
+
+on:
+  push:
+    paths:
+      - .github/workflows/bootstrap.yml
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+jobs:
+  restore:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Reconstruct and verify archive
+        shell: bash
+        run: |
+          cat .bootstrap/archive.part* > /tmp/repository.tar.gz.b64
+          base64 --decode /tmp/repository.tar.gz.b64 > /tmp/repository.tar.gz
+          echo "5ea2f48609913865e2cc2f1e2d13ce702e1c5a9327dd07058666400358d371f6  /tmp/repository.tar.gz" | sha256sum --check -
+          tar -xzf /tmp/repository.tar.gz -C /tmp
+
+      - name: Restore tested repository
+        shell: bash
+        run: |
+          rsync -a --delete --exclude='.git/' /tmp/product-video-analysis-skill/ ./
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add -A
+          git commit -m "feat: publish product video analysis skill"
+          git push
